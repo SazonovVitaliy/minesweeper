@@ -21,6 +21,7 @@ export const GamePage: FC = () => {
   const { rows, columns, bombs, timer } = useAppSelector(
     (state) => state.game.settings
   );
+  const { settings } = useAppSelector((state) => state.game);
 
   const [field, setField] = useState([]);
   const [nonMinesCount, setNonMinesCount] = useState<number>(0);
@@ -122,15 +123,19 @@ export const GamePage: FC = () => {
             Вы проиграли!
           </Heading>
         )}
-        <Link className={s.button} href={"/settings"}>
-          Настройки игры
-        </Link>
+        <div className={s.linkBlock}>
+          <Link className={s.button} href={"/"}>
+            Главная
+          </Link>
+          <Link className={s.button} href={"/settings"}>
+            Настройки игры
+          </Link>
+        </div>
         <div className={s.sectionTop}>
           <div>💣: {minesCount}</div>
           <Timer
             win={win}
             stopGame={stopGame}
-            timer={timer}
             startGame={startGame}
             addBestTime={addBestTime}
           />
