@@ -1,0 +1,34 @@
+.container {
+  display: grid;
+  padding: 60px 0;
+  justify-items: center;
+}
+
+.section {
+  display: grid;
+  gap: 20px;
+  padding: 0 15px;
+}
+
+.sectionTop {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 55px;
+}
+
+.button {
+  min-width: 220px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid gray;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.win {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}

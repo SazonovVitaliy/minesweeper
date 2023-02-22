@@ -1,0 +1,24 @@
+.container {
+  display: grid;
+  justify-items: center;
+  padding-top: 60px;
+}
+
+.section {
+  padding: 40px 15px 0;
+}
+
+.heading {
+  text-align: center;
+}
+
+.button {
+  min-width: 290px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid gray;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}

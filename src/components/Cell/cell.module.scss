@@ -1,0 +1,35 @@
+.cell {
+  border: 1px solid gray;
+  border-radius: 3px;
+  width: 30px;
+  height: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  &.blue {
+    color: blue;
+  }
+  &.green {
+    color: green;
+  }
+  &.red {
+    color: red;
+  }
+  &.darkBlue {
+    color: darkblue;
+  }
+  &.brown {
+    color: brown;
+  }
+  &.turquoise {
+    color: turquoise;
+  }
+  &.black {
+    color: black;
+  }
+  &.white {
+    color: white;
+  }
+  &.gray {
+    background-color: rgb(235, 224, 224);
+  }
+}

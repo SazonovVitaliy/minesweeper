@@ -1,0 +1,18 @@
+.container {
+  padding-top: 60px;
+  display: grid;
+  justify-items: center;
+  background-color: aquamarine;
+}
+
+.section {
+  padding: 40px 15px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.timeBlocks {
+  &:not(:last-child) {
+    margin-right: 40px;
+  }
+}
