@@ -21,12 +21,11 @@ export const GamePage: FC = () => {
   const { rows, columns, bombs, timer } = useAppSelector(
     (state) => state.game.settings
   );
-  const { settings } = useAppSelector((state) => state.game);
 
   const [field, setField] = useState([]);
   const [nonMinesCount, setNonMinesCount] = useState<number>(0);
   const [stopGame, setStopGame] = useState<boolean>(false);
-  const [startGame, setStartGame] = useState<boolean>(true);
+  const [startGame, setStartGame] = useState<boolean>(false);
   const [win, setWin] = useState<boolean>(false);
   const [mineLocation, setMineLocation] = useState([]);
   let [minesCount, setMinesCount] = useState<number>();
@@ -48,7 +47,7 @@ export const GamePage: FC = () => {
     newGame();
   }, []);
 
-  const updateFlag = (e, x, y) => {
+  const updateFlag = (e:React.MouseEvent<HTMLButtonElement>, x: number, y: number) => {
     e.preventDefault();
 
     let newField = JSON.parse(JSON.stringify(field));
@@ -66,7 +65,8 @@ export const GamePage: FC = () => {
     }
   };
 
-  const openCell = (x, y) => {
+  const openCell = (x: number, y: number) => {
+    setStartGame(true);
     let newField = JSON.parse(JSON.stringify(field));
 
     if (newField[x][y].open || newField[x][y].flagged) {
@@ -91,10 +91,10 @@ export const GamePage: FC = () => {
     newGame();
     setWin(false);
     setStopGame(false);
-    setStartGame(true);
+    setStartGame(false);
   };
 
-  const addBestTime = (time) => {
+  const addBestTime = (time: number) => {
     switch (timer) {
       case 10:
         dispatch(addToBegginerTime(time));
@@ -131,24 +131,28 @@ export const GamePage: FC = () => {
             Настройки игры
           </Link>
         </div>
-        <div className={s.sectionTop}>
-          <div>💣: {minesCount}</div>
-          <Timer
-            win={win}
-            stopGame={stopGame}
-            startGame={startGame}
-            addBestTime={addBestTime}
-          />
-        </div>
+        {field.length !== 0 && (
+          <div className={s.sectionTop}>
+            <div>💣: {minesCount}</div>
+            <Timer
+              win={win}
+              stopGame={stopGame}
+              startGame={startGame}
+              addBestTime={addBestTime}
+            />
+          </div>
+        )}
         <Board
           stopGame={stopGame}
           field={field}
           openCell={openCell}
           updateFlag={updateFlag}
         />
-        <Button className={s.button} onClick={restartGame}>
-          Начать заново
-        </Button>
+        {field.length !== 0 && (
+          <Button className={s.button} onClick={restartGame}>
+            Начать заново
+          </Button>
+        )}
       </section>
     </div>
   );

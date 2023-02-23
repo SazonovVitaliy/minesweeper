@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { useAppSelector } from "../../store/hooks";
+import { getPadTime } from "../../utils/getPadTime";
 
 interface TimerProps {
   stopGame: boolean;
@@ -10,30 +11,37 @@ interface TimerProps {
 
 const Timer: FC<TimerProps> = ({ stopGame, startGame, win, addBestTime }) => {
   const { timer } = useAppSelector((state) => state.game.settings);
-  const [time, setTime] = useState<number>(timer * 60);
+  const [timeLeft, setTimeLeft] = useState<number>(timer * 60);
 
-  let timeIntervalId;
+  const hours = getPadTime(Math.floor(timeLeft / 3600));
+  const minutes = getPadTime(Math.floor(timeLeft / 60));
+  const seconds = getPadTime(timeLeft - Number(minutes) * 60);
+
+  const resetTimer = () => {
+    setTimeLeft(timer * 60);
+  };
 
   useEffect(() => {
-    if (startGame) {
-      const incrementTime = () => {
-        let newTime = time - 1;
-        setTime(newTime);
-      };
-      timeIntervalId = setTimeout(() => {
-        incrementTime();
-      }, 1000);
+    const timeIntervalId = setTimeout(() => {
+      if (startGame) {
+        setTimeLeft(timeLeft >= 1 ? timeLeft - 1 : 0);
+      } else {
+        resetTimer();
+      }
+    }, 1000);
+    if (win) {
+      clearTimeout(timeIntervalId);
+      addBestTime(timer * 60 - timeLeft);
     }
-    if (stopGame && win) {
-      addBestTime(timer * 60 - time);
-    }
-    return () => clearInterval(timeIntervalId);
-  }, [time, stopGame, win]);
+    return () => {
+      clearTimeout(timeIntervalId);
+    };
+  }, [stopGame, win, startGame, timeLeft]);
 
   return (
     <div>
       <span>⏲️: </span>
-      {time}
+      {hours}ч:{minutes}м:{seconds}с
     </div>
   );
 };
