@@ -1,4 +1,4 @@
-# **Minesweeper** 💣 [Play Now!](https://minesweeper-nu-ebon.vercel.app/r)
+# **Minesweeper** 💣 [Play Now!](https://minesweeper-nu-ebon.vercel.app)
 
 ## Minesweeper clone with TypeScript, Redux, and NextJS
 
@@ -8,7 +8,7 @@
 
 ---
 
-The rules are pretty simple (try to play with the [demo](https://minesweeper-nu-ebon.vercel.app/r)):
+The rules are pretty simple (try to play with the [demo](https://minesweeper-nu-ebon.vercel.app)):
 
 - Player can left click to reveal square.
 - Player can right click to flag square as mine.
